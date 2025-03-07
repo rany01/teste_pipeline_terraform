@@ -42,11 +42,26 @@ jobs:
       - name: Terraform Plan
         run: terraform plan -out=plano -var="image_tag=4.0${{ github.sha }}"
 
-      - name: Terraform Apply
-        run: terraform apply -auto-approve plano
+#      - name: Terraform Apply
+#        run: terraform apply -auto-approve plano
 
       - name: Update Kubernetes Deployment
         run: |
           kubectl set image deployment/giropops-senhas giropops-senhas=rrany/giropops-senhas:4.0${{ github.sha }} --record
         env:
           KUBECONFIG: ${{ secrets.KUBE_CONFIG }}
+
+  tfsec:
+    runs-on: ubuntu-latest
+    steps:
+      - name: baixando código
+        uses: actions/checkout@v2
+
+      - name: Instalando tfsec
+        run: |
+          curl -s https://raw.githubusercontent.com/aquasecurity/tfsec/master/install.sh | bash
+      
+      - name: Executando tfsec
+        run: tfsec .
+
+# tfsec é uma ferramenta que verifica se o código Terraform está seguro
