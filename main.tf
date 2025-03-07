@@ -1,4 +1,4 @@
-data "aws_ami" "ubuntu" {
+/*data "aws_ami" "ubuntu" {
     most_recent = true
 
     filter {
@@ -24,3 +24,9 @@ resource "aws_instance" "web" {
       Plataforma  = data.aws_ami.ubuntu.platform_details
     }
 }
+
+esses blocos de código não são necessários para a execução do projeto,
+pois são apenas exemplos de como criar uma instância EC2 com uma imagem do Ubuntu.
+Para executar o projeto, basta manter os arquivos variables.tf, outputs.tf, kubernetes.tf e eks.tf.
+
+*/

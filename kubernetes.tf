@@ -1,7 +1,7 @@
 provider "kubernetes" {
     host = module.eks.cluster_endpoint
     cluster_ca_certificate = base64decode(module.eks.cluster_certificate_authority_data)
-    token = data.aws_eks_cluster_auth.cluster.token  
+    token = data.aws_eks_cluster_auth.cluster.token
 }
 
 data "aws_eks_cluster_auth" "cluster" {
@@ -9,6 +9,8 @@ data "aws_eks_cluster_auth" "cluster" {
 }
 
 resource "kubernetes_deployment" "giropops" {
+    depends_on = [ module.eks ] # garanti que o cluster EKS esteja criado antes de criar o deployment
+
     metadata {
         name = "giropops"
         labels = {
@@ -34,7 +36,7 @@ resource "kubernetes_deployment" "giropops" {
 
             spec {
                 container {
-                    image = "rrany/giropops-senhas:4.0"
+                    image = "rrany/giropops-senhas:${var.image_tag}"
                     name = "giropops-senhas"
                     port {
                         container_port = 8080

@@ -34,10 +34,16 @@ jobs:
       - name: Install Terraform
         uses: hashicorp/setup-terraform@v1
       
-      - name: Terraform Init and Apply
-        run: |
-          terraform init
-          terraform apply -auto-approve
+#      - name: Terraform Init and Apply
+#        run: |
+#          terraform init
+#          terraform apply -auto-approve
+      
+      - name: Terraform Plan
+        run: terraform plan -out=plano -var="image_tag=4.0${{ github.sha }}"
+
+      - name: Terraform Apply
+        run: terraform apply -auto-approve plano
 
       - name: Update Kubernetes Deployment
         run: |
