@@ -1,6 +1,22 @@
 # teste_pipeline_terraform
 teste de pipeline do projeto terraform
 
+**Deploy de Aplicação no EKS com Terraform e CI/CD**
+  
+
+## TODO
+ - Adiconar o Cert-Manager no ingress para ter o HTTPS
+
+---
+**Objetivo**: Automatizar a infraestrutura e o deployment da aplicação  **giropops senhas** no Kubernetes (EKS) usando Terraform e GitHub Actions.
+
+### **Tecnologias utilizadas**:
+- **Terraform**: Provisionamento da infraestrutura.
+- **AWS EKS**: Gerenciamento do cluster Kubernetes.
+- **Docker Hub**: Armazenamento das imagens do container.
+- **GitHub Actions**: CI/CD pipeline para deploy contínuo.
+  
+### **Arquitetura**
 
 <!-- BEGIN_TF_DOCS -->
 ## Requirements

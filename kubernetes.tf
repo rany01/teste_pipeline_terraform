@@ -9,7 +9,7 @@ data "aws_eks_cluster_auth" "cluster" {
 }
 
 resource "kubernetes_deployment" "giropops" {
-    depends_on = [ module.eks ] # garanti que o cluster EKS esteja criado antes de criar o deployment
+    depends_on = [ module.eks ] # vai garantir que o cluster EKS esteja criado antes de criar o deployment
 
     metadata {
         name = "giropops"
@@ -134,6 +134,7 @@ resource "kubernetes_service" "redis" {
   
 }
 
+# https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/ingress_v1
 resource "kubernetes_ingress_v1" "giropops_senhas" {
     metadata {
         name = "giropops-senhas-ingress"
@@ -163,7 +164,7 @@ resource "kubernetes_ingress_v1" "giropops_senhas" {
 
         tls {
             hosts = ["giropops.rany.fun"]
-            secret_name = "giropops-rrany-fun-tls"
+            secret_name = "giropops-rany-fun-tls"
         }
     }
 }
